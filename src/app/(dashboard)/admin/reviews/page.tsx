@@ -21,6 +21,7 @@ import {
   RotateCcw,
   Sparkles,
 } from "lucide-react";
+import { EmptyState } from "@/components/ui/empty-state";
 import { Button } from "@/components/ui/button";
 import { StatCard } from "@/components/ui/stat-card";
 import { useToast } from "@/context/ToastProvider";
@@ -757,27 +758,21 @@ export default function ReviewModerationPage() {
           ) : activeTab === "reviews" ? (
             /* TAB 1: PENDING REVIEWS */
             filteredPendingReviews.length === 0 ? (
-              <div className="py-16 px-4 text-center">
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 mb-4">
-                  <CheckCircle2 className="w-7 h-7" />
-                </div>
-                <h3 className="text-base font-semibold text-gray-900">
-                  All pending reviews moderated!
-                </h3>
-                <p className="mt-1 text-sm text-gray-500 max-w-sm mx-auto">
-                  There are no reviews currently awaiting moderation. New client submissions will appear here automatically.
-                </p>
-                {searchQuery && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setSearchQuery("")}
-                    className="mt-4 text-xs"
-                  >
-                    Clear search filter
-                  </Button>
-                )}
-              </div>
+              <EmptyState
+                title="All pending reviews moderated!"
+                description="There are no reviews currently awaiting moderation. New client submissions will appear here automatically."
+                action={
+                  searchQuery && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setSearchQuery("")}
+                    >
+                      Clear search filter
+                    </Button>
+                  )
+                }
+              />
             ) : (
               <div className="divide-y divide-gray-100">
                 {filteredPendingReviews.map((review) => {
@@ -1035,17 +1030,10 @@ export default function ReviewModerationPage() {
           ) : (
             /* TAB 3: MODERATION HISTORY */
             filteredPendingReviews.length === 0 && filteredAbuseReports.length === 0 ? (
-              <div className="py-16 px-4 text-center">
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gray-100 text-gray-500 mb-4">
-                  <Clock className="w-7 h-7" />
-                </div>
-                <h3 className="text-base font-semibold text-gray-900">
-                  No moderated items in history matching filter
-                </h3>
-                <p className="mt-1 text-sm text-gray-500 max-w-sm mx-auto">
-                  Past decisions, resolutions notes, and moderation audit trails will appear here once actions are taken.
-                </p>
-              </div>
+              <EmptyState
+                title="No moderated items in history matching filter"
+                description="Past decisions, resolutions notes, and moderation audit trails will appear here once actions are taken."
+              />
             ) : (
               <div className="divide-y divide-gray-100">
                 {/* Moderated Reviews */}

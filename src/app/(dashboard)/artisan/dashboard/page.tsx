@@ -13,6 +13,7 @@ import {
 import bgImg from '../listings/(assets)/bg.png';
 import { jobs } from '../listings/dummyjobs';
 import { JobStatusBadge } from '@/components/jobs/job-status-badge';
+import { EmptyState } from '@/components/ui/empty-state';
 import { Skeleton, SkeletonCard } from '@/components/ui/skeleton-card';
 import { SkeletonList } from '@/components/ui/skeleton-list';
 import {
@@ -391,9 +392,10 @@ export default function ArtisanDashboard() {
                   )}
                 />
               ) : activeJobsData.length === 0 ? (
-                <div className="p-6 text-center text-sm text-gray-400">
-                  No active jobs at the moment.
-                </div>
+                <EmptyState
+                  title="No active jobs at the moment."
+                  description="New jobs will appear here as they become available."
+                />
               ) : (
                 activeJobsData.map((job, index) => (
                   <div

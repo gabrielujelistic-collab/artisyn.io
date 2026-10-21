@@ -21,6 +21,7 @@ import { PaginationControl } from "@/components/search/pagination-control";
 import { SearchResultCard } from "@/components/search/search-result-card";
 import { SortControl, type SearchSortValue } from "@/components/search/sort-control";
 import { SuggestionsDropdown } from "@/components/search/suggestions-dropdown";
+import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton, SkeletonCard } from "@/components/ui/skeleton-card";
 
 const PAGE_SIZE = 6;
@@ -330,15 +331,15 @@ function ArtisanSearchPageContent() {
                 ))}
               </div>
             ) : (
-              <div className="rounded-xl border border-dashed border-[#CBD5E1] bg-white px-6 py-16 text-center">
-                <h2 className="text-2xl font-semibold text-[#020817]">
-                  No artisans match this search yet.
-                </h2>
-                <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-[#64748B]">
-                  Try broadening your search term, removing a filter, or
-                  increasing your price range to see more results.
-                </p>
-              </div>
+              <EmptyState
+                title="No artisans match this search yet."
+                description={
+                  <>
+                    Try broadening your search term, removing a filter, or
+                    increasing your price range to see more results.
+                  </>
+                }
+              />
             )}
 
             <div className="rounded-xl border border-[#E2E8F0] bg-white p-4">
